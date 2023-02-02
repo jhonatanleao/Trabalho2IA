@@ -3,10 +3,10 @@ for j=1:3000
     dataset = dlmread('vinhoVermelho.csv', sep=",");
     
     % hiperparâmetros
-    hiper_K = 5#randi([3, 5, 7, 9, 11]);
-    hiper_P = 2#randi([1,2]);
+    hiper_K = randi([3, 5, 7, 9, 11]);
+    hiper_P = randi([1,2]);
     fracao_tam_treino = 2/3;
-    num_dimensoes = 8#randi([2,9])
+    num_dimensoes = randi([2,9])
     
     % separação dos datasets
     X = dataset(:, 1:end-1);
@@ -32,7 +32,6 @@ for j=1:3000
     Y_train_validation = Y(parametros_validacao, :);
     X_test = X(parametros_teste, :);
     Y_test = Y(parametros_teste, :);
-    
     [autovetores, autovalores] = eig(cov(X_train));
     autovalores = diag(autovalores);
     [autovalores, indice] = sort(autovalores, 'descend');
@@ -75,10 +74,10 @@ for j=1:3000
     msg_resultados = sprintf('Resultados -- Acertos: %0.2f%%', acerto);
     disp(msg_resultados);
     
-    arquivo_treino = sprintf('resultados_7859/treino-%0.2f%%-%f.mat', acerto, hora);
-    arquivo_validacao = sprintf('resultados_7859/validacao-%0.2f%%-%f.mat', acerto, hora);
-    arquivo_teste = sprintf('resultados_7859/teste-%0.2f%%-%f.mat', acerto, hora);
-    arquivo_parametros = sprintf('resultados_7859/parametros-%0.2f%%-%f.mat', acerto, hora);
+    arquivo_treino = sprintf('resultadosVinhoVermelho/treino-%0.2f%%-%f.mat', acerto, hora);
+    arquivo_validacao = sprintf('resultadosVinhoVermelho/validacao-%0.2f%%-%f.mat', acerto, hora);
+    arquivo_teste = sprintf('resultadosVinhoVermelho/teste-%0.2f%%-%f.mat', acerto, hora);
+    arquivo_parametros = sprintf('resultadosVinhoVermelho/parametros-%0.2f%%-%f.mat', acerto, hora);
 
     dlmwrite(arquivo_treino, [X_train Y_train])
     dlmwrite(arquivo_validacao, [X_train_validation Y_train_validation])
